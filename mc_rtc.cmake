@@ -53,8 +53,8 @@ if(PYTHON_BINDING)
 endif()
 
 AddProject(RBDyn
-  GITHUB jrl-umi3218/RBDyn
-  GIT_TAG origin/master
+  GITHUB mathieu-celerier/RBDyn
+  GIT_TAG origin/RotorInertia
   DEPENDS SpaceVecAlg
   APT_PACKAGES librbdyn-dev python-rbdyn python3-rbdyn
 )
@@ -121,7 +121,7 @@ else()
 endif()
 
 AddProject(tvm
-  GITHUB jrl-umi3218/tvm
+  GITHUB bastien-muraccioli/tvm
   GIT_TAG origin/master
   DEPENDS eigen-qld eigen-quadprog lexls ${tvm_EXTRA_DEPENDS}
   CMAKE_ARGS -DTVM_WITH_QLD:BOOL=ON -DTVM_WITH_QUADPROG:BOOL=ON -DTVM_WITH_LEXLS:BOOL=ON -DTVM_WITH_ROBOT:BOOL=OFF -DTVM_THOROUGH_TESTING:BOOL=OFF -DTVM_WITH_LSSOL:BOOL=${WITH_LSSOL}
@@ -137,7 +137,7 @@ AddCatkinProject(mc_rtc_data
   GITHUB jrl-umi3218/mc_rtc_data
   GIT_TAG ${MC_RTC_ROS_BRANCH}
   WORKSPACE data_ws
-  APT_PACKAGES mc-rtc-data ros-${ROS_DISTRO}-mc-rtc-data
+  APT_PACKAGES mc-rtc-data #ros-${ROS_DISTRO}-mc-rtc-data
 )
 
 set(mc_rtc_DEPENDS tvm Tasks mc_rtc_data ndcurves state-observation)
@@ -146,7 +146,7 @@ if(WITH_ROS_SUPPORT)
     GITHUB jrl-umi3218/mc_rtc_msgs
     GIT_TAG origin/master
     WORKSPACE data_ws
-    APT_PACKAGES ros-${ROS_DISTRO}-mc-rtc-msgs
+    APT_PACKAGES #ros-${ROS_DISTRO}-mc-rtc-msgs
   )
   list(APPEND mc_rtc_DEPENDS mc_rtc_msgs)
 endif()
@@ -168,20 +168,20 @@ else()
   set(MC_RTC_EXTRA_OPTIONS)
 endif()
 AddProject(mc_rtc
-  GITHUB jrl-umi3218/mc_rtc
-  GIT_TAG origin/master
+  GITHUB bastien-muraccioli/mc_rtc
+  GIT_TAG origin/topic/external-forces-aware-qp-ros2-ubuntu24
   CMAKE_ARGS -DMC_LOG_UI_PYTHON_EXECUTABLE=${MC_LOG_UI_PYTHON_EXECUTABLE} ${MC_RTC_ROS_OPTION} ${MC_RTC_EXTRA_OPTIONS}
   DEPENDS ${mc_rtc_DEPENDS}
-  APT_PACKAGES libmc-rtc-dev mc-rtc-utils python-mc-rtc python3-mc-rtc ros-${ROS_DISTRO}-mc-rtc-plugin
+  APT_PACKAGES libmc-rtc-dev mc-rtc-utils python-mc-rtc python3-mc-rtc #ros-${ROS_DISTRO}-mc-rtc-plugin
 )
 
 if(WITH_ROS_SUPPORT)
   AddCatkinProject(mc_rtc_ros
-    GITHUB jrl-umi3218/mc_rtc_ros
+    GITHUB bastien-muraccioli/mc_rtc_ros
     GIT_TAG origin/master
     WORKSPACE mc_rtc_ws
     DEPENDS mc_rtc
-    APT_PACKAGES ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-tools
+    APT_PACKAGES #ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-tools
   )
 endif()
 
@@ -203,5 +203,5 @@ AddProject(mc_state_observation
   GITHUB jrl-umi3218/mc_state_observation
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
-  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+  APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
 )

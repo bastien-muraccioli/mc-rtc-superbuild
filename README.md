@@ -49,6 +49,40 @@ This will:
 
 You can then use the projects that were built and cloned by the superbuild as you would use projects you built and clone yourself. If you modify some projects, the superbuild will pick up on it and rebuild its dependents.
 
+
+#### Note for installation on Ubuntu 24.04
+
+##### Python PIP needs `--break-system-packages` with mc_rtc
+
+ Ubuntu 24.04 has adopted a new approach to Python package management, following PEP 668 (Python Enhancement Proposal 668). This change aims to prevent conflicts between system-installed Python packages and user-installed packages. Adding `--break-system-packages` will bypass this approach but it's not conventional.
+
+##### Warnings treated as errors
+Instead of doing `cmake --build mc-rtc-superbuild/build --config RelWithDebInfo` you will probably need to suppress all warnings treated as errors with:
+```bash
+cd ~/workspace/mc-rtc-superbuild/build
+cmake ../ -DSOURCE_DESTINATION=$HOME/workspace/src/ -DBUILD_DESTINATION=$HOME/workspace/build -DCMAKE_INSTALL_PREFIX=$HOME/workspace/install -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER_LAUNCHER="ccache;distcc" -DCMAKE_CXX_COMPILER_LAUNCHER="ccache;distcc" -DCMAKE_CXX_FLAGS="-Wno-error=maybe-uninitialized"
+
+cmake --build . --config RelWithDebInfo
+```
+
+##### CMake access and permissions issues
+If you install CMake using the default Ubuntu repositories via `apt`, it will typically be located at: `/usr/bin/cmake`.  In Ubuntu 24.04, there have been some changes regarding root access and permissions for certain commands in `/usr/bin/`.
+To resolve this kind of issue you can try to install CMake via snap or by source like the following:
+
+- Download the last version of [CMake](https://cmake.org/download/)
+- Extract the archive and install it in `~/.local`:
+```bash
+./bootstrap --prefix=$HOME/.local
+make
+make install
+```
+- Add CMake to your PATH:
+  After installing CMake in a user-accessible location, add it to your PATH:
+```
+echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc source ~/.bashrc
+```
+- Verify the Installation with `cmake --version`
+
 #### Note
 
 On Linux and macOS, all commands of the form `cmake --build ${FOLDER} --config RelWithDebInfo --target ${TARGET}` can also be run by `make ${TARGET}` in `${FOLDER}`. In particular, you can start a build by simply doing `make` in the build folder.
@@ -269,3 +303,5 @@ RequireExtension
 This allows an extension to require another extension and make sure this extension is included before the one being processed.
 
 Supported arguments are the one of [`FetchContent_Declare`](https://cmake.org/cmake/help/latest/module/FetchContent.html)
+
+
