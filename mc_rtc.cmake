@@ -29,9 +29,8 @@ AddProject(
   APT_PACKAGES libndcurves-dev
 )
 
-AddProject(
-  state-observation
-  GITHUB jrl-umi3218//state-observation
+AddProject(state-observation
+  GITHUB bastien-muraccioli/state-observation
   GIT_TAG origin/master
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
@@ -251,10 +250,9 @@ if(WITH_ROS_SUPPORT)
   AptInstall(ros-${ROS_DISTRO}-tf2-eigen)
 endif()
 
-AddProject(
-  mc_state_observation
-  GITHUB_PRIVATE bastien-muraccioli/mc_state_observation
-  GIT_TAG origin/safe-rl-qp
+AddProject(mc_state_observation
+  GITHUB bastien-muraccioli/mc_state_observation
+  GIT_TAG origin/ubuntu24
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
