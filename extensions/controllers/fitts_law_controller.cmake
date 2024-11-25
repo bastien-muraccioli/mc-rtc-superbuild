@@ -1,4 +1,4 @@
-AptInstall(freeglut3-dev libglfw3-dev)
+AptInstall(freeglut3-dev libglfw3-dev libglew-dev libgl1-mesa-dev)
 
 AddProject(fitts_law_controller
   GITHUB mathieu-celerier/fitts_law_controller
