@@ -3,7 +3,12 @@ mc_rtc superbuild
 
 This project is a superbuild project for mc_rtc and related projects.
 
-It will build all mc_rtc dependencies, mc_rtc itself and downstream projects. You can also extend the project locally or clone extensions to build your own projects.
+It will clone, update, build, install all of mc_rtc dependencies, mc_rtc itself and downstream projects. You can also extend the project locally or clone extensions to build your own projects.
+
+There are two ways to use the superbuild:
+- **Recommended:** Within isolated devcontainers (docker images). This will leave your host system intact, and come with a convenient environment pre-configured to efficiently work with the framework. For building within devcontainers, please refer to [doc/devcontainer.md](doc/devcontainer.md)
+- Or locally on your host machine. Note that system dependencies (apt, pip, ROS, etc.) will be installed globally on your machine. For building with this method, keep reading this page.
+
 
 Requirements
 --
@@ -12,7 +17,8 @@ Requirements
 - [Git](https://git-scm.com/)
 - [Visual Studio 2019 and later](https://visualstudio.microsoft.com/) (Windows)
 
-### Installing the requirements (bootstraping)
+
+### Installing the requirements (bootstrapping)
 
 You can fullfill the requirements above by invoking our bootstraping script:
 
@@ -37,7 +43,7 @@ Then configure and run the superbuild as follows:
 ```shell
 # Run the bootstrap script in mc-rtc-superbuild/utils folder if required
 cmake -S mc-rtc-superbuild -B mc-rtc-superbuild/build -DSOURCE_DESTINATION=${HOME}/devel/src -DBUILD_DESTINATION=${HOME}/devel/build
-cmake --build mc-rtc-superbuild/build --config RelWithDebInfo
+cmake --build mc-rtc-superbuild/build --target install --config RelWithDebInfo
 ```
 
 This will:

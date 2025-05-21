@@ -1,25 +1,49 @@
 if(WITH_ROS_SUPPORT)
-  CreateCatkinWorkspace(ID data_ws DIR "catkin_data_ws" CATKIN_MAKE CATKIN_BUILD_ARGS -DCATKIN_ENABLE_TESTING:BOOL=OFF)
-  CreateCatkinWorkspace(ID mc_rtc_ws DIR "catkin_ws" CATKIN_BUILD)
+  # catkin_make generates CMakeLists.txt with version 3.0. Kitware upgraded its
+  # repository to cmake 4.0 which removes the support for cmake < 3.5 The option
+  # -DCMAKE_POLICY_VERSION_MINIMUM=3.5 is a workaroound that forces the minimum cmake
+  # version to 3.5
+
+  CreateCatkinWorkspace(
+    ID
+    data_ws
+    DIR
+    "catkin_data_ws"
+    CATKIN_MAKE
+    CATKIN_BUILD_ARGS
+    -DCATKIN_ENABLE_TESTING:BOOL=OFF
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+  )
+  CreateCatkinWorkspace(
+    ID
+    mc_rtc_ws
+    DIR
+    "catkin_ws"
+    CATKIN_BUILD
+    CATKIN_BUILD_ARGS
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+  )
 endif()
 
-AddProject(ndcurves
+AddProject(
+  ndcurves
   GITHUB loco-3d/ndcurves
-  GIT_TAG v1.1.5
-  CMAKE_ARGS -DBUILD_PYTHON_INTERFACE:BOOL=OFF
-  SKIP_TEST
+  GIT_TAG v2.0.0
+  CMAKE_ARGS -DBUILD_PYTHON_INTERFACE:BOOL=OFF SKIP_TEST
   APT_PACKAGES libndcurves-dev
 )
 
-AddProject(state-observation
-  GITHUB bastien-muraccioli/state-observation
+AddProject(
+  state-observation
+  GITHUB jrl-umi3218/state-observation
   GIT_TAG origin/master
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
 )
 
 if(PYTHON_BINDING)
-  AddProject(Eigen3ToPython
+  AddProject(
+    Eigen3ToPython
     GITHUB jrl-umi3218/Eigen3ToPython
     GIT_TAG origin/master
     CMAKE_ARGS -DPIP_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
@@ -28,14 +52,16 @@ if(PYTHON_BINDING)
   list(APPEND SpaceVecAlg_DEPENDS Eigen3ToPython)
 endif()
 
-AddProject(SpaceVecAlg
+AddProject(
+  SpaceVecAlg
   GITHUB jrl-umi3218/SpaceVecAlg
   GIT_TAG origin/master
   DEPENDS ${SpaceVecAlg_DEPENDS}
   APT_PACKAGES libspacevecalg-dev python-spacevecalg python3-spacevecalg
 )
 
-AddProject(sch-core
+AddProject(
+  sch-core
   GITHUB jrl-umi3218/sch-core
   GIT_TAG origin/master
   CMAKE_ARGS -DCMAKE_CXX_STANDARD=11
@@ -43,7 +69,8 @@ AddProject(sch-core
 )
 
 if(PYTHON_BINDING)
-  AddProject(sch-core-python
+  AddProject(
+    sch-core-python
     GITHUB jrl-umi3218/sch-core-python
     GIT_TAG origin/master
     CMAKE_ARGS -DPIP_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
@@ -60,24 +87,25 @@ AddProject(RBDyn
 )
 
 if(EMSCRIPTEN)
-  set(USE_F2C_ARGS CMAKE_ARGS "-DUSE_F2C:BOOL=ON" "-DCMAKE_C_STANDARD_INCLUDE_DIRECTORIES=${CMAKE_INSTALL_PREFIX}/include")
+  set(USE_F2C_ARGS
+      CMAKE_ARGS "-DUSE_F2C:BOOL=ON"
+      "-DCMAKE_C_STANDARD_INCLUDE_DIRECTORIES=${CMAKE_INSTALL_PREFIX}/include"
+  )
 else()
   set(USE_F2C_ARGS "")
 endif()
 
-AddProject(eigen-qld
+AddProject(
+  eigen-qld
   GITHUB jrl-umi3218/eigen-qld
-  GIT_TAG origin/master
-  NO_NINJA
-  ${USE_F2C_ARGS}
+  GIT_TAG origin/master NO_NINJA ${USE_F2C_ARGS}
   APT_PACKAGES libeigen-qld-dev python-eigen-qld python3-eigen-qld
 )
 
-AddProject(eigen-quadprog
+AddProject(
+  eigen-quadprog
   GITHUB jrl-umi3218/eigen-quadprog
-  GIT_TAG origin/master
-  NO_NINJA
-  ${USE_F2C_ARGS}
+  GIT_TAG origin/master NO_NINJA ${USE_F2C_ARGS}
   APT_PACKAGES libeigen-quadprog-dev
 )
 
@@ -85,11 +113,10 @@ if(WITH_LSSOL)
   if(USE_MC_RTC_APT_MIRROR)
     message(WARNING "LSSOL will not be used by mc-rtc if mc-rtc apt packages are used")
   endif()
-  AddProject(eigen-lssol
+  AddProject(
+    eigen-lssol
     GITE multi-contact/eigen-lssol
-    GIT_TAG origin/master
-    NO_NINJA
-    ${USE_F2C_ARGS}
+    GIT_TAG origin/master NO_NINJA ${USE_F2C_ARGS}
   )
 endif()
 
@@ -100,14 +127,16 @@ endif()
 if(PYTHON_BINDING)
   list(APPEND Tasks_DEPENDS sch-core-python)
 endif()
-AddProject(Tasks
+AddProject(
+  Tasks
   GITHUB jrl-umi3218/Tasks
   GIT_TAG origin/master
   DEPENDS ${Tasks_DEPENDS}
   APT_PACKAGES libtasks-qld-dev python-tasks python3-tasks
 )
 
-AddProject(lexls
+AddProject(
+  lexls
   GITHUB jrl-umi3218/lexls
   GIT_TAG origin/master
   CMAKE_ARGS -DINSTALL_PDF_DOCUMENTATION:BOOL=OFF -DINSTALL_HTML_DOCUMENTATION:BOOL=OFF
@@ -124,7 +153,10 @@ AddProject(tvm
   GITHUB bastien-muraccioli/tvm
   GIT_TAG origin/master
   DEPENDS eigen-qld eigen-quadprog lexls ${tvm_EXTRA_DEPENDS}
-  CMAKE_ARGS -DTVM_WITH_QLD:BOOL=ON -DTVM_WITH_QUADPROG:BOOL=ON -DTVM_WITH_LEXLS:BOOL=ON -DTVM_WITH_ROBOT:BOOL=OFF -DTVM_THOROUGH_TESTING:BOOL=OFF -DTVM_WITH_LSSOL:BOOL=${WITH_LSSOL}
+  CMAKE_ARGS -DTVM_WITH_QLD:BOOL=ON
+             -DTVM_WITH_QUADPROG:BOOL=ON -DTVM_WITH_LEXLS:BOOL=ON
+             -DTVM_WITH_ROBOT:BOOL=OFF -DTVM_THOROUGH_TESTING:BOOL=OFF
+             -DTVM_WITH_LSSOL:BOOL=${WITH_LSSOL}
   APT_PACKAGES libtvm-dev
 )
 
@@ -133,7 +165,8 @@ if(NOT WITH_ROS_SUPPORT)
 else()
   set(MC_RTC_ROS_BRANCH origin/master)
 endif()
-AddCatkinProject(mc_rtc_data
+AddCatkinProject(
+  mc_rtc_data
   GITHUB jrl-umi3218/mc_rtc_data
   GIT_TAG ${MC_RTC_ROS_BRANCH}
   WORKSPACE data_ws
@@ -142,7 +175,8 @@ AddCatkinProject(mc_rtc_data
 
 set(mc_rtc_DEPENDS tvm Tasks mc_rtc_data ndcurves state-observation)
 if(WITH_ROS_SUPPORT)
-  AddCatkinProject(mc_rtc_msgs
+  AddCatkinProject(
+    mc_rtc_msgs
     GITHUB jrl-umi3218/mc_rtc_msgs
     GIT_TAG origin/master
     WORKSPACE data_ws
@@ -163,7 +197,14 @@ else()
   set(MC_RTC_ROS_OPTION "-DDISABLE_ROS=ON")
 endif()
 if(EMSCRIPTEN)
-  set(MC_RTC_EXTRA_OPTIONS -DMC_RTC_BUILD_STATIC=ON -DMC_RTC_DISABLE_NETWORK=ON -DMC_RTC_DISABLE_STACKTRACE=ON -DJVRC_DESCRIPTION_PATH=/assets/jvrc_description -DMC_ENV_DESCRIPTION_PATH=/assets/mc_env_description -DMC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description)
+  set(MC_RTC_EXTRA_OPTIONS
+      -DMC_RTC_BUILD_STATIC=ON
+      -DMC_RTC_DISABLE_NETWORK=ON
+      -DMC_RTC_DISABLE_STACKTRACE=ON
+      -DJVRC_DESCRIPTION_PATH=/assets/jvrc_description
+      -DMC_ENV_DESCRIPTION_PATH=/assets/mc_env_description
+      -DMC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
+  )
 else()
   set(MC_RTC_EXTRA_OPTIONS)
 endif()
@@ -189,8 +230,9 @@ set(MC_STATE_OBSERVATION_DEPENDS mc_rtc)
 set(MC_STATE_OBSERVATION_OPTIONS "-DWITH_ROS_OBSERVERS=OFF")
 
 if(WITH_ROS_SUPPORT)
-  AddProject(gram_savitzky_golay
-    GITHUB arntanguy/gram_savitzky_golay
+  AddProject(
+    gram_savitzky_golay
+    GITHUB jrl-umi3218/gram_savitzky_golay
     GIT_TAG origin/master
     APT_PACKAGES libgram-savitzky-golay-dev
   )
@@ -199,9 +241,9 @@ if(WITH_ROS_SUPPORT)
   AptInstall(ros-${ROS_DISTRO}-tf2-eigen)
 endif()
 
-AddProject(mc_state_observation
-  GITHUB bastien-muraccioli/mc_state_observation
-  GIT_TAG origin/ubuntu24
+AddProject(
+  mc_state_observation
+  GITHUB jrl-umi3218/mc_state_observation
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
