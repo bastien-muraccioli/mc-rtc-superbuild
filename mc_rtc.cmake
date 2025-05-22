@@ -35,7 +35,7 @@ AddProject(
 
 AddProject(
   state-observation
-  GITHUB jrl-umi3218/state-observation
+  GITHUB bastien-muraccioli/state-observation
   GIT_TAG origin/master
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
@@ -243,7 +243,7 @@ endif()
 
 AddProject(
   mc_state_observation
-  GITHUB jrl-umi3218/mc_state_observation
+  GITHUB bastien-muraccioli/mc_state_observation
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
