@@ -9,7 +9,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="devcontainers"
-ZSH_THEME="bira"
+# ZSH_THEME="bira" # issues with xterm-kitty
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME="devcontainers"
@@ -73,9 +74,17 @@ ZSH_THEME="bira"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    nvm
+    pip
+    pre-commit
+    ssh
+    zsh-interactive-cd
     zsh-autosuggestions
-    zsh-syntax-highlighting
 )
+
+# for zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,4 +119,4 @@ source $ZSH/oh-my-zsh.sh
 DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
 
-source $HOME/superbuild/.devcontainer/entrypoint.sh
+source $HOME/.entrypoint.sh

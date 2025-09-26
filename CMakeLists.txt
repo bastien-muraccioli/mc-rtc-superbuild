@@ -118,6 +118,14 @@ if(EMSCRIPTEN)
   include(cmake/emscripten-dependencies.cmake)
 endif()
 
+if(UNIX)
+  # Workaround for Boost, cmake does not include this path by default
+  set(ENV{CMAKE_PREFIX_PATH} "/usr/lib/x86_64-linux-gnu:$ENV{CMAKE_PREFIX_PATH}")
+  set(ENV{PKG_CONFIG_PATH}
+      "${CMAKE_INSTALL_PREFIX}/share/pkgconfig:$ENV{PKG_CONFIG_PATH}"
+  )
+endif()
+
 if(UNIX
    AND NOT APPLE
    AND NOT EMSCRIPTEN
@@ -142,9 +150,9 @@ message(
 ================================================================================
 **
 ** mc-rtc-superbuild is now ready, the following special targets are available:
-** - clone: clone all projects into their location
-** - update: update all the projects at once
-** - uninstall: uninstall all the project at once
+** - clone: clone all projects into their location, or update remote/branch
+** - update: update all projects at once
+** - uninstall: uninstall all projects at once
 **
 ** You can also use the [COMMAND]-[NAME] form to update particular projects
 **
@@ -153,11 +161,33 @@ message(
 ** - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 )
 
-set(RC_FILE ".bashrc")
-set(RC_EXT ".bash")
-if("$ENV{SHELL}" STREQUAL "/usr/bin/zsh" OR "$ENV{SHELL}" STREQUAL "/bin/zsh")
+# This option may be used by CI to override the shell
+# This is meant to be used when the shell used for building differs
+# from the one used at runtime
+option(SUPERBUILD_OVERRIDE_SHELL "Manually override shell (zsh or bash)" "")
+if(SUPERBUILD_OVERRIDE_SHELL STREQUAL "zsh")
   set(RC_FILE ".zshrc")
   set(RC_EXT ".zsh")
+elseif(SUPERBUILD_OVERRIDE_SHELL STREQUAL "bash")
+  set(RC_FILE ".bashrc")
+  set(RC_EXT ".bash")
+else()
+  # Defaults to bash
+  set(CURRENT_SHELL "bash")
+  set(RC_FILE ".bashrc")
+  set(RC_EXT ".bash")
+
+  if("$ENV{SHELL}" STREQUAL "/usr/bin/zsh" OR "$ENV{SHELL}" STREQUAL "/bin/zsh")
+    set(CURRENT_SHELL "zsh")
+    set(RC_FILE ".zshrc")
+    set(RC_EXT ".zsh")
+  elseif("$ENV{SHELL}" STREQUAL "/usr/bin/bash" OR "$ENV{SHELL}" STREQUAL "/bin/bash")
+    # default
+  else()
+    message(WARNING "Current shell could not be detected, assuming bash")
+  endif()
+
+  message(STATUS "Detected shell: ${CURRENT_SHELL}")
 endif()
 
 set(FINAL_MESSAGE
@@ -204,8 +234,9 @@ if(WITH_ROS_SUPPORT)
     get_property(DIR GLOBAL PROPERTY CATKIN_WORKSPACE_${ID}_DIR)
     if(ROS_IS_ROS2)
       set(ROS_SETUP_PATH "${DIR}/install/setup${RC_EXT}")
-      set(FINAL_COMMAND "${FINAL_COMMAND} 
-export ROS_LOCALHOST_ONLY=1")
+      set(FINAL_COMMAND "${FINAL_COMMAND}
+export ROS_LOCALHOST_ONLY=1"
+      )
     else()
       set(ROS_SETUP_PATH "${DIR}/devel/setup${RC_EXT}")
     endif()
