@@ -35,7 +35,7 @@ AddProject(
 
 AddProject(
   state-observation
-  GITHUB bastien-muraccioli/state-observation
+  GITHUB jrl-umi3218//state-observation
   GIT_TAG origin/master
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
@@ -89,7 +89,7 @@ endif()
 
 AddProject(RBDyn
   GITHUB mathieu-celerier/RBDyn
-  GIT_TAG origin/RotorInertia
+  GIT_TAG origin/topic/RotorInertia
   DEPENDS SpaceVecAlg
   APT_PACKAGES librbdyn-dev python-rbdyn python3-rbdyn
 )
@@ -257,7 +257,7 @@ endif()
 
 AddProject(
   mc_state_observation
-  GITHUB bastien-muraccioli/mc_state_observation
+  GITHUB jrl-umi3218//mc_state_observation
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
