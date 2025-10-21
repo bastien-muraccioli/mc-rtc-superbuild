@@ -8,6 +8,8 @@ AddCatkinProject(
   h1_description
   GITHUB_PRIVATE bastien-muraccioli/h1_description
   GIT_TAG origin/safe-rl-qp
+  GITHUB_PRIVATE bastien-muraccioli/h1_description
+  GIT_TAG origin/safe-rl-qp
   WORKSPACE data_ws
 )
 
@@ -18,12 +20,16 @@ if(mc_mujoco_FOUND)
     h1_mj_description
     GITHUB_PRIVATE bastien-muraccioli/h1_mj_description
     GIT_TAG origin/safe-rl-qp
+    GITHUB_PRIVATE bastien-muraccioli/h1_mj_description
+    GIT_TAG origin/safe-rl-qp
     DEPENDS mc_rtc
   )
 endif()
 
 AddProject(
   mc_h1
+  GITHUB_PRIVATE bastien-muraccioli/mc_h1
+  GIT_TAG origin/main
   GITHUB_PRIVATE bastien-muraccioli/mc_h1
   GIT_TAG origin/safe-rl-qp
   DEPENDS mc_rtc
