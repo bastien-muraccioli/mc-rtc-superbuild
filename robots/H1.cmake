@@ -6,8 +6,8 @@ endif()
 
 AddCatkinProject(
   h1_description
-  GITHUB isri-aist/h1_description
-  GIT_TAG origin/main
+  GITHUB_PRIVATE bastien-muraccioli/h1_description
+  GIT_TAG origin/safe-rl-qp
   WORKSPACE data_ws
 )
 
@@ -16,15 +16,15 @@ find_package(mc_mujoco QUIET)
 if(mc_mujoco_FOUND)
   AddProject(
     h1_mj_description
-    GITHUB isri-aist/h1_mj_description
-    GIT_TAG origin/master
+    GITHUB_PRIVATE bastien-muraccioli/h1_mj_description
+    GIT_TAG origin/safe-rl-qp
     DEPENDS mc_rtc
   )
 endif()
 
 AddProject(
   mc_h1
-  GITHUB isri-aist/mc_h1
+  GITHUB_PRIVATE bastien-muraccioli/mc_h1
   GIT_TAG origin/main
   DEPENDS mc_rtc
 )

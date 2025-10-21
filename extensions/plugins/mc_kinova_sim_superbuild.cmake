@@ -3,8 +3,8 @@ include(${CMAKE_CURRENT_LIST_DIR}/../superbuild-extensions/simulation/MuJoCo.cma
 AptInstall(libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libglew-dev)
 
 AddProject(mc_mujoco
-  GITHUB mathieu-celerier/mc_mujoco
-  GIT_TAG origin/main
+  GITHUB_PRIVATE bastien-muraccioli/mc_mujoco
+  GIT_TAG origin/safe-rl-qp
   CMAKE_ARGS -DMUJOCO_ROOT_DIR=${MUJOCO_ROOT_DIR}
   DEPENDS mc_rtc
 )
@@ -72,8 +72,8 @@ AddCatkinProject(ros2_kortex
 )
 
 AddProject(mc_kinova
-  GITHUB bastien-muraccioli/mc_kinova
-  GIT_TAG origin/topic/bota_ft_sensor-ros2
+  GITHUB mathieu-celerier/mc_kinova
+  GIT_TAG origin/RSS2025
   DEPENDS mc_rtc ros2_kortex
 )
 
@@ -82,8 +82,8 @@ function(AddKinovaMujocoModel)
     return()
   endif()
   AddProject(kinova_mj_description
-    GITHUB bastien-muraccioli/kinova_mj_description
-    GIT_TAG origin/bota_ft_sensor
+    GITHUB_PRIVATE bastien-muraccioli/kinova_mj_description
+    GIT_TAG origin/bota_ft_sensor_w_DS4_adapter
     DEPENDS mc_mujoco mc_kinova
   )
 endfunction()

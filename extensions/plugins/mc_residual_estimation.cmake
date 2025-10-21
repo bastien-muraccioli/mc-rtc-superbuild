@@ -1,5 +1,5 @@
 AddProject(mc_residual_estimation
-  GITHUB bastien-muraccioli/mc_residual_estimation
-  GIT_TAG origin/ros2
+  GITHUB_PRIVATE bastien-muraccioli/mc_residual_estimation
+  GIT_TAG origin/safe-rl-qp
   DEPENDS mc_rtc
 )

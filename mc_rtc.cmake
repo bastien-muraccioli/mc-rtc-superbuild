@@ -164,7 +164,7 @@ else()
 endif()
 
 AddProject(tvm
-  GITHUB bastien-muraccioli/tvm
+  GITHUB_PRIVATE bastien-muraccioli/tvm
   GIT_TAG origin/master
   DEPENDS eigen-qld eigen-quadprog lexls ${tvm_EXTRA_DEPENDS}
   CMAKE_ARGS -DTVM_WITH_QLD:BOOL=ON
@@ -223,8 +223,8 @@ else()
   set(MC_RTC_EXTRA_OPTIONS)
 endif()
 AddProject(mc_rtc
-  GITHUB bastien-muraccioli/mc_rtc
-  GIT_TAG origin/topic/external-forces-aware-qp-ros2-ubuntu24
+  GITHUB_PRIVATE bastien-muraccioli/mc_rtc
+  GIT_TAG origin/master
   CMAKE_ARGS -DMC_LOG_UI_PYTHON_EXECUTABLE=${MC_LOG_UI_PYTHON_EXECUTABLE} ${MC_RTC_ROS_OPTION} ${MC_RTC_EXTRA_OPTIONS}
   DEPENDS ${mc_rtc_DEPENDS}
   APT_PACKAGES libmc-rtc-dev mc-rtc-utils python-mc-rtc python3-mc-rtc #ros-${ROS_DISTRO}-mc-rtc-plugin
@@ -232,7 +232,7 @@ AddProject(mc_rtc
 
 if(WITH_ROS_SUPPORT)
   AddCatkinProject(mc_rtc_ros
-    GITHUB bastien-muraccioli/mc_rtc_ros
+    GITHUB_PRIVATE bastien-muraccioli/mc_rtc_ros
     GIT_TAG origin/master
     WORKSPACE mc_rtc_ws
     DEPENDS mc_rtc
@@ -257,7 +257,8 @@ endif()
 
 AddProject(
   mc_state_observation
-  GITHUB jrl-umi3218//mc_state_observation
+  GITHUB_PRIVATE bastien-muraccioli/mc_state_observation
+  GIT_TAG origin/safe-rl-qp
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
