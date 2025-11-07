@@ -91,8 +91,8 @@ endif()
 
 AddProject(
   RBDyn
-  GITHUB jrl-umi3218/RBDyn
-  GIT_TAG origin/master
+  GITHUB mathieu-celerier/RBDyn
+  GIT_TAG origin/topic/RotorInertia
   DEPENDS SpaceVecAlg
   APT_PACKAGES librbdyn-dev python-rbdyn python3-rbdyn
 )
