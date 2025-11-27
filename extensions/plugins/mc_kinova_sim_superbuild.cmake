@@ -66,14 +66,14 @@ if(NOT CONAN_RESULT EQUAL 0)
 endif()
 
 AddCatkinProject(ros2_kortex
-  GITHUB Kinovarobotics/ros2_kortex
+  GITHUB_PRIVATE Kinovarobotics/ros2_kortex
   GIT_TAG origin/main
   WORKSPACE data_ws
 )
 
 AddProject(mc_kinova
-  GITHUB mathieu-celerier/mc_kinova
-  GIT_TAG origin/RSS2025
+  GITHUB_PRIVATE mathieu-celerier/mc_kinova
+  GIT_TAG origin/main-external-forces
   DEPENDS mc_rtc ros2_kortex
 )
 
@@ -83,7 +83,7 @@ function(AddKinovaMujocoModel)
   endif()
   AddProject(kinova_mj_description
     GITHUB_PRIVATE bastien-muraccioli/kinova_mj_description
-    GIT_TAG origin/bota_ft_sensor_w_DS4_adapter
+    GIT_TAG origin/main
     DEPENDS mc_mujoco mc_kinova
   )
 endfunction()
