@@ -25,22 +25,28 @@ endif()
 AddProject(
   mc_h1
   GITHUB_PRIVATE bastien-muraccioli/mc_h1
-  GIT_TAG origin/main
+  GIT_TAG origin/safe-rl-qp
   DEPENDS mc_rtc
 )
 
+# AddProject(
+#   unitree_sdk2
+#   GITHUB isri-aist/unitree_sdk2
+#   GIT_TAG aist/devel-mc_unitree2
+# )
+
 AddProject(
   unitree_sdk2
-  GITHUB isri-aist/unitree_sdk2
-  GIT_TAG aist/devel-mc_unitree2
+  GITHUB_PRIVATE bastien-muraccioli/unitree_sdk2
+  GIT_TAG bastien/devel-mc_unitree2
 )
 
 ExternalProject_Get_Property(unitree_sdk2 SOURCE_DIR)
 
 AddProject(
   mc_unitree2
-  GITHUB isri-aist/mc_unitree2
-  GIT_TAG origin/master
+  GITHUB_PRIVATE bastien-muraccioli/mc_unitree2
+  GIT_TAG origin/devel
   CMAKE_ARGS -DGENERATE_H1_CONTROLLER=ON -DUNITREE_SDK2_SRC_DIR=${SOURCE_DIR}
                                          -DCMAKE_POLICY_VERSION_MINIMUM=3.5
   DEPENDS mc_rtc unitree_sdk2
