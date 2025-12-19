@@ -9,14 +9,14 @@ endif()
 AddCatkinProject(
   hrp5_p_description
   GITHUB_PRIVATE isri-aist/hrp5_p_description
-  GIT_TAG origin/master
+  GIT_TAG origin/hrp5p_with_hammer
   WORKSPACE data_ws
   CMAKE_ARGS ${MC_RTC_ROS_OPTION}
 )
 
 AddProject(
   mc_hrp5_p
-  GITHUB_PRIVATE isri-aist/mc_hrp5_p
+  GITHUB_PRIVATE RuudErens/mc_hrp5_p
   GIT_TAG origin/master
   DEPENDS hrp5_p_description mc_rtc
 )

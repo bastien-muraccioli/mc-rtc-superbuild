@@ -1,4 +1,4 @@
 AddProject(HammeringTaskNew
 	GITHUB RuudErens/hammering_task_controller
-	GIT_TAG origin/TVM_test_WithoutBSpline
+	GIT_TAG origin/version_with_new_constraint_version
 )
