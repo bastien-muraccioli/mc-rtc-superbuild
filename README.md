@@ -116,84 +116,6 @@ Then configure and run the superbuild from the terminal, or use VSCode's "CMake 
 
     cmake --build mc-rtc-superbuild/build --target install --config RelWithDebInfo
   ```
-#### Build with cmake presets
-
-Then configure and run the superbuild from the terminal, or use VSCode's "CMake Tools" extension to select your desired build preset.
-  Note that default presets will:
-  - clone all projects in `./devel`
-  - build all projects in `./build/projects`
-  - install all projects in `./install`
-
-  ```bash
-  # Setup cmake and install all dependencies if necessary
-  cmake --preset relwithdebinfo
-  ```
-
-  ```bash
-  # Build all projects
-  cmake --build --preset relwithdebinfo
-  ```
-> <details>
->  <summary>ℹ️ Create custom presets</summary>
->   If you need to customize the build process, you can create your own presets. Here is an example of how to define custom CMake presets:
->
-> **CMakeUserPresets.json**
-> ```json
->{
->  "version": 10,
->  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
->  "configurePresets": [
->    {
->      "name": "custom-name",
->      "displayName": "Custom Name",
->      "inherits": "relwithdebinfo",
->      "cacheVariables": {
->        "SOURCE_DESTINATION": "${sourceDir}/../workspace/custom_devel",
->        "BUILD_DESTINATION": "${sourceDir}/../workspace/custom_build/projects",
->        "CMAKE_INSTALL_PREFIX": "${sourceDir}/../workspace/custom_install"
->      }
->    }
->  ],
->  "buildPresets": [
->    {
->      "name": "custom-name",
->      "displayName": "Custom Name",
->      "configurePreset": "custom-name",
->      "configuration": "RelWithDebInfo",
->      "targets": [
->        "install"
->      ]
->    }
->  ]
->}
->   ```
->
->   This example defines two custom presets: one for configuring the project and one for building it.
->
-> - **`configurePresets`**: Defines the settings used for configuration.
->   - `"name"`: The name of the custom preset.
->   - `"displayName"`: A human-readable name for the preset.
->   - `"inherits"`: Inherits settings from another preset (e.g., `relwithdebinfo`).
->   - `"cacheVariables"`: Custom variables to specify directories for source, build, install locations or other options.
->
-> - **`buildPresets`**: Defines the settings for building the project.
->   - `"name"`: The name of the custom preset.
->   - `"configurePreset"`: Specifies which configure preset to use.
->   - `"configuration"`: The build configuration (e.g., `RelWithDebInfo`).
->   - `"targets"`: Specifies the build targets (e.g., `install`).
-> </details>
-
-#### Build with standard cmake commands
-
-<details>
-  <summary>Build with standard cmake commands</summary>
-
-  ```bash
-    # Run the bootstrap script in mc-rtc-superbuild/utils folder if required
-    cmake -S mc-rtc-superbuild -B mc-rtc-superbuild/build -DSOURCE_DESTINATION=${HOME}/devel/src -DBUILD_DESTINATION=${HOME}/devel/build -DCMAKE_INSTALL_PREFIX=${HOME}/devel/install
-
-    cmake --build mc-rtc-superbuild/build --target install --config RelWithDebInfo
-  ```
 
   This will:
 
@@ -432,5 +354,3 @@ RequireExtension
 This allows an extension to require another extension and make sure this extension is included before the one being processed.
 
 Supported arguments are the one of [`FetchContent_Declare`](https://cmake.org/cmake/help/latest/module/FetchContent.html)
-
-

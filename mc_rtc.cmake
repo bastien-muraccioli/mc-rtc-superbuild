@@ -180,7 +180,8 @@ AddCatkinProject(
   GITHUB jrl-umi3218/mc_rtc_data
   GIT_TAG ${MC_RTC_ROS_BRANCH}
   WORKSPACE data_ws
-  APT_PACKAGES mc-rtc-data #ros-${ROS_DISTRO}-mc-rtc-data
+  APT_PACKAGES mc-rtc-data ros-${ROS_DISTRO}-mc-rtc-data
+  CMAKE_ARGS ${MC_RTC_ROS_OPTION}
 )
 
 set(mc_rtc_DEPENDS tvm Tasks mc_rtc_data ndcurves state-observation mesh-sampling)
@@ -190,7 +191,7 @@ if(WITH_ROS_SUPPORT)
     GITHUB jrl-umi3218/mc_rtc_msgs
     GIT_TAG origin/master
     WORKSPACE data_ws
-    APT_PACKAGES #ros-${ROS_DISTRO}-mc-rtc-msgs
+    APT_PACKAGES ros-${ROS_DISTRO}-mc-rtc-msgs
   )
   list(APPEND mc_rtc_DEPENDS mc_rtc_msgs)
 endif()
@@ -221,18 +222,21 @@ endif()
 AddProject(mc_rtc
   GITHUB_PRIVATE bastien-muraccioli/mc_rtc
   GIT_TAG origin/master
-  CMAKE_ARGS -DMC_LOG_UI_PYTHON_EXECUTABLE=${MC_LOG_UI_PYTHON_EXECUTABLE} ${MC_RTC_ROS_OPTION} ${MC_RTC_EXTRA_OPTIONS}
+  CMAKE_ARGS -DMC_LOG_UI_PYTHON_EXECUTABLE=${MC_LOG_UI_PYTHON_EXECUTABLE}
+             ${MC_RTC_ROS_OPTION} ${MC_RTC_EXTRA_OPTIONS}
   DEPENDS ${mc_rtc_DEPENDS}
-  APT_PACKAGES libmc-rtc-dev mc-rtc-utils python-mc-rtc python3-mc-rtc #ros-${ROS_DISTRO}-mc-rtc-plugin
+  APT_PACKAGES libmc-rtc-dev mc-rtc-utils python-mc-rtc python3-mc-rtc
+               ros-${ROS_DISTRO}-mc-rtc-plugin
 )
 
 if(WITH_ROS_SUPPORT)
-  AddCatkinProject(mc_rtc_ros
-    GITHUB_PRIVATE bastien-muraccioli/mc_rtc_ros
+  AddCatkinProject(
+    mc_rtc_ros
+    GITHUB jrl-umi3218/mc_rtc_ros
     GIT_TAG origin/master
     WORKSPACE mc_rtc_ws
     DEPENDS mc_rtc
-    APT_PACKAGES #ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-tools
+    APT_PACKAGES ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-tools
   )
 endif()
 
@@ -253,9 +257,9 @@ endif()
 
 AddProject(
   mc_state_observation
-  GITHUB_PRIVATE jrl-umi3218/mc_state_observation
+  GITHUB jrl-umi3218/mc_state_observation
   GIT_TAG origin/main
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
-  APT_PACKAGES mc-state-observation #ros-${ROS_DISTRO}-mc-state-observation
+  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 )
