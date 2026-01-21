@@ -116,6 +116,84 @@ Then configure and run the superbuild from the terminal, or use VSCode's "CMake 
 
     cmake --build mc-rtc-superbuild/build --target install --config RelWithDebInfo
   ```
+#### Build with cmake presets
+
+Then configure and run the superbuild from the terminal, or use VSCode's "CMake Tools" extension to select your desired build preset.
+  Note that default presets will:
+  - clone all projects in `./devel`
+  - build all projects in `./build/projects`
+  - install all projects in `./install`
+
+  ```bash
+  # Setup cmake and install all dependencies if necessary
+  cmake --preset relwithdebinfo
+  ```
+
+  ```bash
+  # Build all projects
+  cmake --build --preset relwithdebinfo
+  ```
+> <details>
+>  <summary>ℹ️ Create custom presets</summary>
+>   If you need to customize the build process, you can create your own presets. Here is an example of how to define custom CMake presets:
+>
+> **CMakeUserPresets.json**
+> ```json
+>{
+>  "version": 10,
+>  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+>  "configurePresets": [
+>    {
+>      "name": "custom-name",
+>      "displayName": "Custom Name",
+>      "inherits": "relwithdebinfo",
+>      "cacheVariables": {
+>        "SOURCE_DESTINATION": "${sourceDir}/../workspace/custom_devel",
+>        "BUILD_DESTINATION": "${sourceDir}/../workspace/custom_build/projects",
+>        "CMAKE_INSTALL_PREFIX": "${sourceDir}/../workspace/custom_install"
+>      }
+>    }
+>  ],
+>  "buildPresets": [
+>    {
+>      "name": "custom-name",
+>      "displayName": "Custom Name",
+>      "configurePreset": "custom-name",
+>      "configuration": "RelWithDebInfo",
+>      "targets": [
+>        "install"
+>      ]
+>    }
+>  ]
+>}
+>   ```
+>
+>   This example defines two custom presets: one for configuring the project and one for building it.
+>
+> - **`configurePresets`**: Defines the settings used for configuration.
+>   - `"name"`: The name of the custom preset.
+>   - `"displayName"`: A human-readable name for the preset.
+>   - `"inherits"`: Inherits settings from another preset (e.g., `relwithdebinfo`).
+>   - `"cacheVariables"`: Custom variables to specify directories for source, build, install locations or other options.
+>
+> - **`buildPresets`**: Defines the settings for building the project.
+>   - `"name"`: The name of the custom preset.
+>   - `"configurePreset"`: Specifies which configure preset to use.
+>   - `"configuration"`: The build configuration (e.g., `RelWithDebInfo`).
+>   - `"targets"`: Specifies the build targets (e.g., `install`).
+> </details>
+
+#### Build with standard cmake commands
+
+<details>
+  <summary>Build with standard cmake commands</summary>
+
+  ```bash
+    # Run the bootstrap script in mc-rtc-superbuild/utils folder if required
+    cmake -S mc-rtc-superbuild -B mc-rtc-superbuild/build -DSOURCE_DESTINATION=${HOME}/devel/src -DBUILD_DESTINATION=${HOME}/devel/build -DCMAKE_INSTALL_PREFIX=${HOME}/devel/install
+
+    cmake --build mc-rtc-superbuild/build --target install --config RelWithDebInfo
+  ```
 
   This will:
 
@@ -123,40 +201,6 @@ Then configure and run the superbuild from the terminal, or use VSCode's "CMake 
   2. Create a meta-repository at `SOURCE_DESTINATION` (the folder must be empty or already created by another superbuild instance)
   3. Add Git submodules for each of the projects in the meta-repository
   4. Build each project in the `${BUILD_DESTINATION}/${PROJECT}` folder and install it in the provided `${CMAKE_INSTALL_PREFIX}`
-
-
-#### Note for installation on Ubuntu 24.04
-
-##### Python PIP needs `--break-system-packages` with mc_rtc
-
- Ubuntu 24.04 has adopted a new approach to Python package management, following PEP 668 (Python Enhancement Proposal 668). This change aims to prevent conflicts between system-installed Python packages and user-installed packages. Adding `--break-system-packages` will bypass this approach but it's not conventional.
-
-##### Warnings treated as errors
-Instead of doing `cmake --build mc-rtc-superbuild/build --config RelWithDebInfo` you will probably need to suppress all warnings treated as errors with:
-```bash
-cd ~/workspace/mc-rtc-superbuild/build
-cmake ../ -DSOURCE_DESTINATION=$HOME/workspace/src/ -DBUILD_DESTINATION=$HOME/workspace/build -DCMAKE_INSTALL_PREFIX=$HOME/workspace/install -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER_LAUNCHER="ccache;distcc" -DCMAKE_CXX_COMPILER_LAUNCHER="ccache;distcc" -DCMAKE_CXX_FLAGS="-Wno-error=maybe-uninitialized"
-
-cmake --build . --config RelWithDebInfo
-```
-
-##### CMake access and permissions issues
-If you install CMake using the default Ubuntu repositories via `apt`, it will typically be located at: `/usr/bin/cmake`.  In Ubuntu 24.04, there have been some changes regarding root access and permissions for certain commands in `/usr/bin/`.
-To resolve this kind of issue you can try to install CMake via snap or by source like the following:
-
-- Download the last version of [CMake](https://cmake.org/download/)
-- Extract the archive and install it in `~/.local`:
-```bash
-./bootstrap --prefix=$HOME/.local
-make
-make install
-```
-- Add CMake to your PATH:
-  After installing CMake in a user-accessible location, add it to your PATH:
-```
-echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.bashrc source ~/.bashrc
-```
-- Verify the Installation with `cmake --version`
 
   #### Note
 
