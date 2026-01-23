@@ -258,7 +258,9 @@ endif()
 
 AddProject(
   mc_state_observation
-  GITHUB jrl-umi3218/mc_state_observation
+  # GITHUB jrl-umi3218/mc_state_observation
+  # GIT_TAG origin/main
+  GITHUB_PRIVATE bastien-muraccioli/mc_state_observation
   GIT_TAG origin/main
   CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
