@@ -31,11 +31,18 @@ AddProject(
 
 AddProject(
   state-observation
-  GITHUB jrl-umi3218/state-observation
-  GIT_TAG origin/master
+  GITHUB ArnaudDmt/state-observation
+  GIT_TAG origin/submission_TRO_KineticsObserver_24_12
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
 )
+#AddProject(
+#        state-observation
+#        GITHUB jrl-umi3218/state-observation
+#        GIT_TAG origin/master
+#        CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
+#        APT_PACKAGES libstate-observation-dev
+#)
 
 if(PYTHON_BINDING)
   AddProject(
@@ -300,3 +307,13 @@ AddProject(
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 )
+#AddProject(
+#        mc_state_observation
+#        # GITHUB jrl-umi3218/mc_state_observation
+#        # GIT_TAG origin/main
+#        GITHUB bastien-muraccioli/mc_state_observation
+#        GIT_TAG origin/safe-rl-qp
+#        CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
+#        DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
+#        APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+#)
