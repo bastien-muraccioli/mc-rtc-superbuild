@@ -31,7 +31,7 @@ AddProject(
 
 AddProject(
   state-observation
-  GITHUB ArnaudDmt/state-observation
+  GITHUB RuudErens/state-observation
   GIT_TAG origin/submission_TRO_KineticsObserver_24_12
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
