@@ -70,13 +70,6 @@ AddProject(
   DEPENDS mc_rtc ${mc_panda_DEPENDS}
 )
 
-AddProject(
-  panda_mj_description
-  GITHUB isri-aist/panda_mj_description
-  GIT_TAG origin/main
-  DEPENDS mc_rtc
-)
-
 if(WITH_MC_FRANKA)
   AptInstall(libcap2-bin) # for setcap
   AddProject(

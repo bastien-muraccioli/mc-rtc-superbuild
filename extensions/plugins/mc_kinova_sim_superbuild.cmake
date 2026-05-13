@@ -1,14 +1,3 @@
-include(${CMAKE_CURRENT_LIST_DIR}/../superbuild-extensions/simulation/MuJoCo.cmake)
-
-AptInstall(libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libglew-dev)
-
-AddProject(mc_mujoco
-  GITHUB_PRIVATE bastien-muraccioli/mc_mujoco
-  GIT_TAG origin/main
-  CMAKE_ARGS -DMUJOCO_ROOT_DIR=${MUJOCO_ROOT_DIR}
-  DEPENDS mc_rtc
-)
-
 if(NOT WITH_ROS_SUPPORT)
   message(FATAL_ERROR "ROS support is required to use the Kinova robot")
 endif()
@@ -73,7 +62,7 @@ AddCatkinProject(ros2_kortex
 
 AddProject(mc_kinova
   GITHUB_PRIVATE mathieu-celerier/mc_kinova
-  GIT_TAG origin/main-external-forces
+  GIT_TAG origin/main
   DEPENDS mc_rtc ros2_kortex
 )
 
@@ -83,7 +72,7 @@ function(AddKinovaMujocoModel)
   endif()
   AddProject(kinova_mj_description
     GITHUB_PRIVATE bastien-muraccioli/kinova_mj_description
-    GIT_TAG origin/main
+    GIT_TAG origin/devel
     DEPENDS mc_mujoco mc_kinova
   )
 endfunction()

@@ -140,7 +140,7 @@ if(PYTHON_BINDING)
 endif()
 AddProject(
   Tasks
-  GITHUB jrl-umi3218/Tasks
+  GITHUB_PRIVATE bastien-muraccioli/Tasks
   GIT_TAG origin/master
   DEPENDS ${Tasks_DEPENDS}
   APT_PACKAGES libtasks-qld-dev python-tasks python3-tasks
@@ -222,7 +222,7 @@ else()
 endif()
 AddProject(mc_rtc
   GITHUB_PRIVATE bastien-muraccioli/mc_rtc
-  GIT_TAG origin/master
+  GIT_TAG origin/devel
   CMAKE_ARGS -DMC_LOG_UI_PYTHON_EXECUTABLE=${MC_LOG_UI_PYTHON_EXECUTABLE}
              ${MC_RTC_ROS_OPTION} ${MC_RTC_EXTRA_OPTIONS}
   DEPENDS ${mc_rtc_DEPENDS}
