@@ -1,5 +1,13 @@
 set(EXTENSIONS_DIR ${CMAKE_CURRENT_LIST_DIR}/superbuild-extensions)
 # include(${EXTENSIONS_DIR}/gui/mc_rtc-magnum.cmake)
+
+# set(DRCUTIL_DIR ${CMAKE_CURRENT_LIST_DIR}/drcutil-superbuild)
+# include(${DRCUTIL_DIR}/full.cmake)
+# include(${DRCUTIL_DIR}/openrtm2.cmake)
+# include(${DRCUTIL_DIR}/drcutil.cmake)
+# include(${DRCUTIL_DIR}/choreonoid.cmake)
+# include(${DRCUTIL_DIR}/mc-openrtm.cmake)
+
 include(${CMAKE_CURRENT_LIST_DIR}/interfaces/mc_mujoco.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/interfaces/panda_mj_description.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/interfaces/rhps1_mj_description.cmake)
