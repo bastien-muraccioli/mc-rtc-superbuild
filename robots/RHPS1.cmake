@@ -16,5 +16,5 @@ AddProject(
   mc_rhps1
   GITHUB_PRIVATE isri-aist/mc_rhps1
   GIT_TAG origin/master
-  DEPENDS rhps1_description mc_rtc
+  DEPENDS mc_rtc
 )
