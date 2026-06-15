@@ -98,8 +98,8 @@ endif()
 
 AddProject(
   RBDyn
-  GITHUB mathieu-celerier/RBDyn
-  GIT_TAG origin/topic/RotorInertia
+  GITHUB jrl-umi3218/RBDyn
+  GIT_TAG a4531a4
   DEPENDS SpaceVecAlg
   APT_PACKAGES librbdyn-dev python-rbdyn python3-rbdyn
 )
@@ -278,7 +278,7 @@ if(WITH_ROS_SUPPORT)
   AddCatkinProject(
     mc_rtc_ros
     GITHUB jrl-umi3218/mc_rtc_ros
-    GIT_TAG origin/master
+    GIT_TAG 227917d348971b3ba39e7dcef0df4ca65c6bf511
     WORKSPACE mc_rtc_ws
     DEPENDS mc_rtc
     APT_PACKAGES ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-tools

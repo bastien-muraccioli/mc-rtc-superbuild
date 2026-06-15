@@ -17,6 +17,6 @@ AddCatkinProject(
 AddProject(
   mc_hrp5_p
   GITHUB_PRIVATE RuudErens/mc_hrp5_p
-  GIT_TAG origin/master
+  GIT_TAG origin/master#668a9f7
   DEPENDS hrp5_p_description mc_rtc
 )
