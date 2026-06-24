@@ -1,0 +1,3 @@
+[submodule "extensions/drcutil-superbuild"]
+	path = extensions/drcutil-superbuild
+	url = git@github.com:isri-aist/drcutil-superbuild.git
