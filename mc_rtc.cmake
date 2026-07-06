@@ -79,8 +79,7 @@ endif()
 AddProject(
   mesh-sampling
   GITHUB jrl-umi3218/mesh_sampling
-  # GIT_TAG origin/master
-  GIT_TAG origin/revert-11-revert-10-fix-convex-generation
+  GIT_TAG origin/master
   APT_PACKAGES libmesh-sampling-dev
   APT_DEPENDENCIES libgtest-dev libqhull-dev libassimp-dev
   CMAKE_ARGS ${MESH_SAMPLING_ARGS}
