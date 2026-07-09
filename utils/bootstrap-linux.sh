@@ -41,5 +41,10 @@ fi
 
 if [[ ! -f $HOME/.local/bin/pre-commit ]]
 then
-  /usr/bin/python3 -m pip install --break-system-packages --user pre-commit
+  if [[ `lsb_release -cs` == "noble" ]]
+  then
+    pipx install pre-commit
+  else
+    /usr/bin/python3 -m pip install --user pre-commit
+  fi
 fi
