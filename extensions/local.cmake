@@ -40,12 +40,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/plugins/obstacle_detection_jerk_estimator.cmak
 include(${CMAKE_CURRENT_LIST_DIR}/controllers/figaroh_identification_controller.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/controllers/ijrr_vel_drop_controller.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/plugins/mc_collision_monitoring_birjandi.cmake)
-
-
-
-
 include(${CMAKE_CURRENT_LIST_DIR}/controllers/collision_benchmark_controller.cmake)
-
 include(${CMAKE_CURRENT_LIST_DIR}/plugins/mc_ros_posture_pub_sub.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/controllers/posture_datastore_controller.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/controllers/mc_svlr.cmake)
