@@ -1,4 +1,5 @@
 AddProject(HammeringTaskNew
-	GITHUB RuudErens/hammering_task_controller
+	GITHUB ThibaultDel/hammering_task_controller
 	GIT_TAG origin/version_with_new_constraint_version
 )
+
