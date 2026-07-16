@@ -31,7 +31,8 @@ AddProject(
 
 AddProject(
   state-observation
-  GITHUB jrl-umi3218/state-observation
+  # GITHUB jrl-umi3218/state-observation
+  GITHUB_PRIVATE bastien-muraccioli/state-observation
   GIT_TAG origin/master
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev

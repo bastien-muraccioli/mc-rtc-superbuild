@@ -36,7 +36,7 @@ AddCatkinProject(
 AddProject(
   mc_kinova
   GITHUB_PRIVATE mathieu-celerier/mc_kinova
-  GIT_TAG origin/topic/add-genA-bota
+  GIT_TAG origin/devel-rl
   DEPENDS ${MC_KINOVA_DEPENDS}
 )
 
