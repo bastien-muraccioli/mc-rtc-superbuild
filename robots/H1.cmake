@@ -46,7 +46,7 @@ ExternalProject_Get_Property(unitree_sdk2 SOURCE_DIR)
 AddProject(
   mc_unitree2
   GITHUB_PRIVATE bastien-muraccioli/mc_unitree2
-  GIT_TAG origin/devel
+  GIT_TAG origin/master
   CMAKE_ARGS -DGENERATE_H1_CONTROLLER=ON -DUNITREE_SDK2_SRC_DIR=${SOURCE_DIR}
                                          -DCMAKE_POLICY_VERSION_MINIMUM=3.5
   DEPENDS mc_rtc unitree_sdk2
