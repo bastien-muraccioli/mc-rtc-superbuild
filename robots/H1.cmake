@@ -7,7 +7,7 @@ endif()
 AddCatkinProject(
   h1_description
   GITHUB_PRIVATE bastien-muraccioli/h1_description
-  GIT_TAG origin/safe-rl-qp
+  GIT_TAG origin/main
   WORKSPACE data_ws
 )
 
@@ -17,7 +17,7 @@ if(mc_mujoco_FOUND)
   AddProject(
     h1_mj_description
     GITHUB_PRIVATE bastien-muraccioli/h1_mj_description
-    GIT_TAG origin/safe-rl-qp
+    GIT_TAG origin/master
     DEPENDS mc_rtc
   )
 endif()
@@ -25,7 +25,7 @@ endif()
 AddProject(
   mc_h1
   GITHUB_PRIVATE bastien-muraccioli/mc_h1
-  GIT_TAG origin/safe-rl-qp
+  GIT_TAG origin/main
   DEPENDS mc_rtc
 )
 
@@ -38,7 +38,7 @@ AddProject(
 AddProject(
   unitree_sdk2
   GITHUB_PRIVATE bastien-muraccioli/unitree_sdk2
-  GIT_TAG bastien/devel-mc_unitree2
+  GIT_TAG origin/main
 )
 
 ExternalProject_Get_Property(unitree_sdk2 SOURCE_DIR)
