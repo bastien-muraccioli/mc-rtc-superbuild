@@ -36,6 +36,17 @@ AddProject(
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
 )
+<<<<<<< HEAD
+=======
+
+#AddProject(
+#        state-observation
+#        GITHUB jrl-umi3218/state-observation
+#        GIT_TAG origin/master
+#        CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
+#        APT_PACKAGES libstate-observation-dev
+#)
+>>>>>>> 3b74f9e (Merge issue solving MujocoRosUtils/Mujoco/Mc_rtc)
 
 if(PYTHON_BINDING)
   AddProject(
@@ -252,7 +263,7 @@ if(EMSCRIPTEN)
       -DMC_RTC_DISABLE_STACKTRACE=ON
       -DJVRC_DESCRIPTION_PATH=/assets/jvrc_description
       -DMC_ENV_DESCRIPTION_PATH=/assets/mc_env_description
-      -DMC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
+      -MC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
   )
 else()
   set(MC_RTC_EXTRA_OPTIONS)
@@ -300,3 +311,27 @@ AddProject(
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 )
+<<<<<<< HEAD
+=======
+#AddProject(
+#  mc_state_observation
+#  # GITHUB jrl-umi3218/mc_state_observation
+#  # GIT_TAG origin/main
+#  GITHUB RuudErens/mc_state_observation
+#  GIT_TAG origin/submission_TRO_KineticsObserver_24_12
+#  CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
+#  DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
+#  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+#)
+
+AddProject(
+        mc_state_observation
+        # GITHUB jrl-umi3218/mc_state_observation
+        # GIT_TAG origin/main
+        GITHUB bastien-muraccioli/mc_state_observation
+        GIT_TAG origin/safe-rl-qp
+        CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
+        DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
+        APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+)
+>>>>>>> 3b74f9e (Merge issue solving MujocoRosUtils/Mujoco/Mc_rtc)
