@@ -36,6 +36,7 @@ AddProject(
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
 )
+
 #AddProject(
 #        state-observation
 #        GITHUB jrl-umi3218/state-observation
@@ -259,7 +260,7 @@ if(EMSCRIPTEN)
       -DMC_RTC_DISABLE_STACKTRACE=ON
       -DJVRC_DESCRIPTION_PATH=/assets/jvrc_description
       -DMC_ENV_DESCRIPTION_PATH=/assets/mc_env_description
-      -DMC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
+      -MC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
   )
 else()
   set(MC_RTC_EXTRA_OPTIONS)
@@ -278,7 +279,7 @@ if(WITH_ROS_SUPPORT)
   AddCatkinProject(
     mc_rtc_ros
     GITHUB jrl-umi3218/mc_rtc_ros
-    GIT_TAG 227917d348971b3ba39e7dcef0df4ca65c6bf511
+    GIT_TAG origin/master
     WORKSPACE mc_rtc_ws
     DEPENDS mc_rtc
     APT_PACKAGES ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-tools
@@ -308,12 +309,23 @@ AddProject(
   APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 )
 #AddProject(
-#        mc_state_observation
-#        # GITHUB jrl-umi3218/mc_state_observation
-#        # GIT_TAG origin/main
-#        GITHUB bastien-muraccioli/mc_state_observation
-#        GIT_TAG origin/safe-rl-qp
-#        CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
-#        DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
-#        APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+#  mc_state_observation
+#  # GITHUB jrl-umi3218/mc_state_observation
+#  # GIT_TAG origin/main
+#  GITHUB RuudErens/mc_state_observation
+#  GIT_TAG origin/submission_TRO_KineticsObserver_24_12
+#  CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
+#  DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
+#  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 #)
+
+AddProject(
+        mc_state_observation
+        # GITHUB jrl-umi3218/mc_state_observation
+        # GIT_TAG origin/main
+        GITHUB bastien-muraccioli/mc_state_observation
+        GIT_TAG origin/safe-rl-qp
+        CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
+        DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
+        APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+)
