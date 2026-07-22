@@ -31,8 +31,8 @@ AddProject(
 
 AddProject(
   state-observation
-  GITHUB RuudErens/state-observation
-  GIT_TAG origin/submission_TRO_KineticsObserver_24_12
+  GITHUB jrl-umi3218/state-observation
+  GIT_TAG origin/master
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
 )
@@ -100,7 +100,7 @@ endif()
 AddProject(
   RBDyn
   GITHUB jrl-umi3218/RBDyn
-  GIT_TAG a4531a4
+  GIT_TAG origin/master
   DEPENDS SpaceVecAlg
   APT_PACKAGES librbdyn-dev python-rbdyn python3-rbdyn
 )
@@ -268,7 +268,7 @@ endif()
 AddProject(
   mc_rtc
   GITHUB bastien-muraccioli/mc_rtc
-  GIT_TAG origin/devel
+  GIT_TAG origin/hrp5p
   CMAKE_ARGS -DMC_LOG_UI_PYTHON_EXECUTABLE=${MC_LOG_UI_PYTHON_EXECUTABLE}
              ${MC_RTC_ROS_OPTION} ${MC_RTC_EXTRA_OPTIONS}
   DEPENDS ${mc_rtc_DEPENDS}
@@ -321,8 +321,6 @@ AddProject(
 
 AddProject(
         mc_state_observation
-        # GITHUB jrl-umi3218/mc_state_observation
-        # GIT_TAG origin/main
         GITHUB bastien-muraccioli/mc_state_observation
         GIT_TAG origin/safe-rl-qp
         CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
