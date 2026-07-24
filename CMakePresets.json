@@ -9,7 +9,7 @@
             "binaryDir": "${sourceDir}/../workspace/build/superbuild",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-                "SOURCE_DESTINATION": "${sourceDir}/../workspace/devel",
+                "SOURCE_DESTINATION": "${sourceDir}/../workspace/src",
                 "BUILD_DESTINATION": "${sourceDir}/../workspace/build/projects",
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/../workspace/install"
             }
