@@ -36,21 +36,7 @@ AddProject(
   CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
   APT_PACKAGES libstate-observation-dev
 )
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-#AddProject(
-#        state-observation
-#        GITHUB jrl-umi3218/state-observation
-#        GIT_TAG origin/master
-#        CMAKE_ARGS -DBUILD_STATE_OBSERVATION_TOOLS:BOOL=OFF
-#        APT_PACKAGES libstate-observation-dev
-#)
->>>>>>> 3b74f9e (Merge issue solving MujocoRosUtils/Mujoco/Mc_rtc)
-
-=======
->>>>>>> 9a5a286 (clean commit for PR)
 if(PYTHON_BINDING)
   AddProject(
     Eigen3ToPython
@@ -307,7 +293,6 @@ if(WITH_ROS_SUPPORT)
   AptInstall(ros-${ROS_DISTRO}-tf2-eigen)
 endif()
 
-<<<<<<< HEAD
 AddProject(
   mc_state_observation
   GITHUB bastien-muraccioli/mc_state_observation
@@ -315,35 +300,4 @@ AddProject(
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 )
-<<<<<<< HEAD
-=======
-#AddProject(
-#  mc_state_observation
-#  # GITHUB jrl-umi3218/mc_state_observation
-#  # GIT_TAG origin/main
-#  GITHUB RuudErens/mc_state_observation
-#  GIT_TAG origin/submission_TRO_KineticsObserver_24_12
-#  CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
-#  DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
-#  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
-#)
 
-AddProject(
-        mc_state_observation
-        # GITHUB jrl-umi3218/mc_state_observation
-        # GIT_TAG origin/main
-        GITHUB bastien-muraccioli/mc_state_observation
-        GIT_TAG origin/safe-rl-qp
-        CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
-        DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
-        APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
-=======
-AddProject(
-  mc_state_observation
-  GITHUB bastien-muraccioli/mc_state_observation
-  CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
-  DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
-  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
->>>>>>> 9a5a286 (clean commit for PR)
-)
->>>>>>> 3b74f9e (Merge issue solving MujocoRosUtils/Mujoco/Mc_rtc)
