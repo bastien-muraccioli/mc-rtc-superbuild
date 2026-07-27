@@ -39,6 +39,7 @@ AddProject(
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 #AddProject(
 #        state-observation
 #        GITHUB jrl-umi3218/state-observation
@@ -48,6 +49,8 @@ AddProject(
 #)
 >>>>>>> 3b74f9e (Merge issue solving MujocoRosUtils/Mujoco/Mc_rtc)
 
+=======
+>>>>>>> 9a5a286 (clean commit for PR)
 if(PYTHON_BINDING)
   AddProject(
     Eigen3ToPython
@@ -304,6 +307,7 @@ if(WITH_ROS_SUPPORT)
   AptInstall(ros-${ROS_DISTRO}-tf2-eigen)
 endif()
 
+<<<<<<< HEAD
 AddProject(
   mc_state_observation
   GITHUB bastien-muraccioli/mc_state_observation
@@ -333,5 +337,13 @@ AddProject(
         CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
         DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
         APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+=======
+AddProject(
+  mc_state_observation
+  GITHUB bastien-muraccioli/mc_state_observation
+  CMAKE_ARGS ${MC_STATE_OBSERVATION_OPTIONS}
+  DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
+  APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
+>>>>>>> 9a5a286 (clean commit for PR)
 )
 >>>>>>> 3b74f9e (Merge issue solving MujocoRosUtils/Mujoco/Mc_rtc)
