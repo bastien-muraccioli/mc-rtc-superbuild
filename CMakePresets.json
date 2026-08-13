@@ -11,7 +11,8 @@
                 "CMAKE_BUILD_TYPE": "RelWithDebInfo",
                 "SOURCE_DESTINATION": "${sourceDir}/../src",
                 "BUILD_DESTINATION": "${sourceDir}/../build",
-                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../install"
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../install",
+		"BUILD_TESTING": "ON"
             }
         },
         {
