@@ -16,7 +16,7 @@ AddCatkinProject(
 
 AddProject(
   mc_hrp5_p
-  GITHUB_PRIVATE isri-aist/mc_hrp5_p
+  GITHUB_PRIVATE bastien-muraccioli/mc_hrp5_p
   GIT_TAG origin/master
   DEPENDS hrp5_p_description mc_rtc
 )
