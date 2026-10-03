@@ -8,7 +8,7 @@ endif()
 
 AddCatkinProject(
   hrp5_p_description
-  GITHUB_PRIVATE isri-aist/hrp5_p_description
+  GITHUB_PRIVATE bastien-muraccioli/hrp5_p_description
   GIT_TAG origin/master
   WORKSPACE data_ws
   CMAKE_ARGS ${MC_RTC_ROS_OPTION}
