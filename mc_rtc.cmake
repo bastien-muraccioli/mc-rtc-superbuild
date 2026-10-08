@@ -252,7 +252,7 @@ if(EMSCRIPTEN)
       -DMC_RTC_DISABLE_STACKTRACE=ON
       -DJVRC_DESCRIPTION_PATH=/assets/jvrc_description
       -DMC_ENV_DESCRIPTION_PATH=/assets/mc_env_description
-      -DMC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
+      -MC_INT_OBJ_DESCRIPTION_PATH=/assets/mc_int_obj_description
   )
 else()
   set(MC_RTC_EXTRA_OPTIONS)
@@ -300,3 +300,4 @@ AddProject(
   DEPENDS ${MC_STATE_OBSERVATION_DEPENDS}
   APT_PACKAGES mc-state-observation ros-${ROS_DISTRO}-mc-state-observation
 )
+
