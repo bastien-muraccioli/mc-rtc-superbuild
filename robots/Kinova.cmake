@@ -43,6 +43,6 @@ AddProject(
 AddProject(
   mc_kortex
   GITHUB_PRIVATE mathieu-celerier/mc_kortex
-  GIT_TAG origin/main
+  GIT_TAG 5031658fb6b55f6ff836d33b4cb1e812fd91a6cf
   DEPENDS mc_rtc ros_kortex
 )
