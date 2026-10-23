@@ -160,7 +160,7 @@ if(PYTHON_BINDING)
 endif()
 AddProject(
   Tasks
-  GITHUB_PRIVATE bastien-muraccioli/Tasks
+  GITHUB_PRIVATE jrl-umi3218/Tasks
   GIT_TAG origin/master
   DEPENDS ${Tasks_DEPENDS}
   APT_PACKAGES libtasks-qld-dev python-tasks python3-tasks
