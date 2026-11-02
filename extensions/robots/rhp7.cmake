@@ -7,7 +7,7 @@ AddCatkinProject(
 
 AddProject(
   mc_rhp7
-  GITHUB_PRIVATE Yoshida-Lab-TUS/mc_rhp7
+  GITHUB_PRIVATE bastien-muraccioli/mc_rhp7
   GIT_TAG origin/main
   DEPENDS rhp7_description mc_rtc
 )
