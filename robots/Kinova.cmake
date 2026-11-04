@@ -1,7 +1,7 @@
 option(WITH_Kinova "Build Kinova support" OFF)
 option(WITH_Kinova_Bota "Build Kinova with Bota support" OFF)
 
-if(NOT WITH_Kinova)
+if(NOT WITH_Kinova AND NOT WITH_KORTEX_DRIVER)
   return()
 endif()
 
@@ -26,12 +26,12 @@ if(WITH_Kinova_Bota)
   list(APPEND MC_KINOVA_DEPENDS bota_driver_ros2)
 endif()
 
-AddCatkinProject(
-  ros_kortex
-  GITHUB Kinovarobotics/ros2_kortex
-  GIT_TAG origin/${ROS_DISTRO}
-  WORKSPACE data_ws INSTALL_DEPENDENCIES
-)
+  AddCatkinProject(
+    ros_kortex
+    GITHUB Kinovarobotics/ros2_kortex
+    GIT_TAG origin/${ROS_DISTRO}
+    WORKSPACE data_ws INSTALL_DEPENDENCIES PACKAGES_SELECT kortex_description
+  )
 
 AddProject(
   mc_kinova
