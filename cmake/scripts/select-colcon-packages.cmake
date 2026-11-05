@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+
 if(NOT DEFINED SOURCE_DIR)
   message(FATAL_ERROR "SOURCE_DIR was not provided")
 endif()

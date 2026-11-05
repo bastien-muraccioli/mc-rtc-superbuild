@@ -768,9 +768,6 @@ function(AddCatkinProject NAME)
 
       ExternalProject_Add_Step(
         ${NAME} install_dependencies
-        COMMAND rosdep update && rosdep install --from-path src --ignore-src
-                -y -r
-        WORKING_DIRECTORY ${WORKSPACE_DIR}
         COMMAND rosdep update
         COMMAND rosdep install --from-paths ${ROSDEP_PATHS} --ignore-src -y -r
         WORKING_DIRECTORY "${WORKSPACE_DIR}"
